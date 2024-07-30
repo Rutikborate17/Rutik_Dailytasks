@@ -1,0 +1,104 @@
+-- Create the Departments Table
+CREATE TABLE Departments (
+    DepartmentID INT PRIMARY KEY,
+    DepartmentName VARCHAR(50) NOT NULL
+);
+
+-- Create the Employees Table 
+CREATE TABLE Employees (
+    EmployeeID INT PRIMARY KEY,
+    FirstName VARCHAR(50) NOT NULL,
+    LastName VARCHAR(50) NOT NULL,
+    Email VARCHAR(100) NOT NULL UNIQUE,
+    Salary INT NOT NULL CHECK (Salary > 0),
+    DepartmentID INT,
+    FOREIGN KEY (DepartmentID) REFERENCES Departments(DepartmentID)
+);
+
+-- Create the Projects Table 
+CREATE TABLE Projects (
+    ProjectID INT PRIMARY KEY,
+    ProjectName VARCHAR(100) NOT NULL,
+    DepartmentID INT,
+    FOREIGN KEY (DepartmentID) REFERENCES Departments(DepartmentID)
+);
+
+
+-- Insert data into Departments Table
+INSERT INTO Departments (DepartmentID, DepartmentName) VALUES
+(1, 'Marketing'),
+(2, 'Sales'),
+(3, 'IT'),
+(4, 'Finance'),
+(5, 'HR');
+
+-- Insert data into Employees Table
+INSERT INTO Employees (EmployeeID, FirstName, LastName, Email, Salary, DepartmentID) VALUES
+(1, 'John', 'Doe', 'john.doe@company.com', 60000, 1),
+(2, 'Jane', 'Smith', 'jane.smith@company.com', 75000, 2),
+(3, 'Michael', 'Johnson', 'michael.johnson@company.com', 85000, 1),
+(4, 'Emily', 'Williams', 'emily.williams@company.com', 72000, 3),
+(5, 'David', 'Brown', 'david.brown@company.com', 65000, 2),
+(6, 'Sarah', 'Davis', 'sarah.davis@company.com', 90000, 3);
+
+-- Insert data into Projects Table
+INSERT INTO Projects (ProjectID, ProjectName, DepartmentID) VALUES
+(1, 'Project A', 1),
+(2, 'Project B', 2),
+(3, 'Project C', 3),
+(4, 'Project D', 4),
+(5, 'Project E', 5);
+
+
+-- Q 1.
+
+
+INSERT INTO Employees (EmployeeID, FirstName, LastName, Email, Salary, DepartmentID) VALUES
+(7, 'Alice', 'Green', 'alice.green@company.com', 70000, 999);
+
+
+-- Q2.
+
+INSERT INTO Employees (EmployeeID, FirstName, LastName, Email, Salary, DepartmentID) VALUES
+(8, 'Bob', 'White', 'john.doe@company.com', 65000, 1);
+
+-- Q3
+
+
+DELETE FROM Departments WHERE DepartmentID = 1;
+
+--Q4
+
+
+UPDATE Employees SET DepartmentID = 999 WHERE EmployeeID = 1;
+
+-- Q5
+
+ADD CONSTRAINT fk_department
+FOREIGN KEY (DepartmentID) REFERENCES Departments(DepartmentID);
+
+--Q6
+
+
+INSERT INTO Employees (EmployeeID, FirstName, LastName, Email, Salary, DepartmentID)
+VALUES (7, 'Alice', 'Green', 'alice.green@company.com', 70000, 999);
+
+-- Q7
+
+
+INSERT INTO Employees (EmployeeID, FirstName, LastName, Email, Salary, DepartmentID)
+VALUES (8, 'Bob', 'White', 'john.doe@company.com', 65000, 1);
+
+-- Q8
+
+
+DELETE FROM Departments
+WHERE DepartmentID = 1;
+
+-- Q9
+
+
+UPDATE Employees
+SET DepartmentID = 999
+WHERE EmployeeID = 1;
+
